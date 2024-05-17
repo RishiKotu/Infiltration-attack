@@ -6,14 +6,24 @@ public class PlayerControls : MonoBehaviour
 
     
 {
-
+    [SerializeField] float controlSpeed = 10f;
+    [SerializeField] float xRange = 8f;
+    [SerializeField] float yRange = 6f;
     void Update()
     {
         float xThrow = Input.GetAxis("Horizontal");
-
-
         float yThrow = Input.GetAxis("Vertical");
-        Debug.Log(xThrow + "," + yThrow);
+
+        float xOffset = xThrow * Time.deltaTime * controlSpeed;
+        float rawXPos = transform.localPosition.x + xOffset;
+        float clampedXPos = Mathf.Clamp(rawXPos, -xRange, xRange);
+
+        float yOffset = yThrow * Time.deltaTime * controlSpeed;
+        float rawYpos = transform.localPosition.y + yOffset;
+        float clampedYPos = Mathf.Clamp(rawYpos, -yRange, yRange);
+
+        transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z);
+
 
     }
 }
