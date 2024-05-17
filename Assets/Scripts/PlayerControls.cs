@@ -24,6 +24,6 @@ public class PlayerControls : MonoBehaviour
 
         transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z);
 
-
+        
     }
 }
